@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <?fileVersion 4.0.0?>
 
 <cproject>
@@ -19,7 +19,7 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactExtension="a" artifactName="ofAddons" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.macosx.lib.debug.1675516345" name="Debug Mac OS X" parent="cdt.managedbuild.config.macosx.lib.debug" postbuildStep="ranlib &quot;${workspace_loc}/openFrameworks/addons/Debug Mac OS X/libofAddons.a&quot;">
+<configuration artifactExtension="a" artifactName="ofAddons" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.macosx.lib.debug.1675516345" name="Debug Mac OS X" parent="cdt.managedbuild.config.macosx.lib.debug" postbuildStep="ranlib &quot;${workspace_loc:/ofAddons}/Debug Mac OS X/libofAddons.a&quot;">
 <folderInfo id="cdt.managedbuild.config.macosx.lib.debug.1675516345." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.macosx.lib.debug.667755180" name="MacOSX GCC" superClass="cdt.managedbuild.toolchain.gnu.macosx.lib.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.macosx.lib.debug.1149010083" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.macosx.lib.debug"/>
@@ -566,7 +566,7 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactExtension="a" artifactName="ofAddons" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.macosx.lib.debug.1675516345.2046160749" name="Release Mac OS X" parent="cdt.managedbuild.config.macosx.lib.debug" postbuildStep="ranlib &quot;${workspace_loc}/openFrameworks/addons/Release Mac OS X/libofAddons.a&quot;">
+<configuration artifactExtension="a" artifactName="ofAddons" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.macosx.lib.debug.1675516345.2046160749" name="Release Mac OS X" parent="cdt.managedbuild.config.macosx.lib.debug" postbuildStep="ranlib &quot;${workspace_loc:/ofAddons}/Release Mac OS X/libofAddons.a&quot;">
 <folderInfo id="cdt.managedbuild.config.macosx.lib.debug.1675516345.2046160749." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.macosx.lib.debug.1672526793" name="MacOSX GCC" superClass="cdt.managedbuild.toolchain.gnu.macosx.lib.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.macosx.lib.debug.224057596" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.macosx.lib.debug"/>
@@ -1699,7 +1699,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/rtAudio/include}&quot;"/>
 </option>
 <option id="gnu.cpp.compiler.option.other.other.950861315" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 `pkg-config gstreamer-0.10 --cflags` " valueType="string"/>
-<option id="gnu.cpp.compiler.option.optimization.flags.1228611032" superClass="gnu.cpp.compiler.option.optimization.flags" value="-march=native" valueType="string"/>
+<option id="gnu.cpp.compiler.option.optimization.flags.1228611032" name="Other optimization flags" superClass="gnu.cpp.compiler.option.optimization.flags" value="-march=native" valueType="string"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.82813596" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.macosx.lib.debug.97720822" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.macosx.lib.debug">
