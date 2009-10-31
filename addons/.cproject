@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?fileVersion 4.0.0?>
 
 <cproject>
@@ -1699,7 +1699,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/rtAudio/include}&quot;"/>
 </option>
 <option id="gnu.cpp.compiler.option.other.other.950861315" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 `pkg-config gstreamer-0.10 --cflags` " valueType="string"/>
-<option id="gnu.cpp.compiler.option.optimization.flags.1228611032" name="Other optimization flags" superClass="gnu.cpp.compiler.option.optimization.flags" value="-march=native" valueType="string"/>
+<option id="gnu.cpp.compiler.option.optimization.flags.1228611032" name="Other optimization flags" superClass="gnu.cpp.compiler.option.optimization.flags" value="-march=native -mtune=native -mmmx -msse -msse2 -msse3 -fopenmp" valueType="string"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.82813596" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.macosx.lib.debug.97720822" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.macosx.lib.debug">
