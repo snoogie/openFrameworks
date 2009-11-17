@@ -29,6 +29,8 @@
 
 // ofShape  tesselation callbacks
 
+
+
 class ofShape{
 public:
 	ofShape(){
@@ -38,6 +40,7 @@ public:
 		//TODO: implement id in .cpp
 		currentStartVertex=0;
 		polyMode = OF_POLY_WINDING_ODD;
+		drawMode = OF_OUTLINE;
 		noFill();
 	}
 	virtual ~ofShape(){}
@@ -52,14 +55,12 @@ public:
 	void vertex(const ofPoint & vertex){
 		points.push_back(vertex);
 
+		double* point = new double[3];
+		point[0] = vertex.x;
+		point[1] = vertex.y;
+		point[2] = vertex.z;
+		newVertices.push_back(point);
 
-		newVertices.push_back( vertex.x );
-		newVertices.push_back( vertex.y );
-		newVertices.push_back( vertex.z );
-
-		tessVertices.push_back( vertex.x );
-		tessVertices.push_back( vertex.y );
-		tessVertices.push_back( vertex.z );
 
 		clearCurveVertices();	// we drop any "curve calls"
 								// once a vertex call has been made
@@ -80,24 +81,35 @@ public:
 	void endShape(bool bClose){
 		bIsConvex = isConvex();
 
-		// (close -> add the first point to the end)
+		// TODO: Not working! (close -> add the first point to the end)
 		// -----------------------------------------------
 		if ((bClose == true)){
 			//---------------------------
-			if ((int)points.size() > currentStartVertex){
+			if ((int)points.size() > currentStartVertex && points.back() != points[currentStartVertex]){
 				vertex(points[currentStartVertex]);
-
 			}
 		}
+
+
 		ofLog(OF_LOG_VERBOSE,"ending a shape of %i points",points.size());
-		if(!bIsConvex){
+		if(((polyMode == OF_POLY_WINDING_ODD) && (drawMode == OF_OUTLINE)) || bIsConvex){
+			tesselation tess;
+			tess.shapeType = (drawMode == OF_FILLED) ? GL_TRIANGLE_FAN : GL_LINE_STRIP;;
+			tessVertices.push_back(tess);
+			for(unsigned i=0; i<points.size(); i++){
+				ofPoint point;
+				tessVertices[0].tessVertices[i*3]   = point.x;
+				tessVertices[0].tessVertices[i*3+1] = point.y;
+				tessVertices[0].tessVertices[i*3+2] = point.z;
+			}
+		}else{
 			startTess();
 			if ( tesselator != NULL){
 				gluTessBeginContour( tesselator);
 				for (unsigned i=0; i<points.size(); i++) {
 					ofLog(OF_LOG_VERBOSE,"generating point: %i",i);
 
-					gluTessVertex( tesselator, &tessVertices[i*3], &tessVertices[i*3]);
+					gluTessVertex( tesselator, newVertices[i], newVertices[i]);
 				}
 				gluTessEndContour( tesselator);
 
@@ -105,18 +117,6 @@ public:
 			endTess();
 
 			clearVertices();
-			for(unsigned i=0; i<tessVertices.size()/3; i++){
-				ofPoint point;
-				point.x = tessVertices[i*3];
-				point.y = tessVertices[i*3+1];
-				point.z = tessVertices[i*3+2];
-				points.push_back(point);
-				newVertices.push_back(point.x);
-				newVertices.push_back(point.y);
-				newVertices.push_back(point.z);
-			}
-		}else{
-			shapeType = (drawMode == OF_FILLED) ? GL_TRIANGLES : GL_LINE_LOOP;
 		}
 
 		uploadVBO();
@@ -128,16 +128,20 @@ public:
 		//TODO: this should go in ofGraphics?? if (bSmoothHinted && drawMode == OF_OUTLINE) startSmoothing();
 
 		//VBO
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vboId);
-		glEnableClientState(GL_VERTEX_ARRAY);                 // activate vertex coords array
-		glVertexPointer(3, GL_FLOAT, 0, 0);                   // last param is offset, not ptr
-		glDrawArrays(shapeType, 0, points.size());
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+		for(unsigned i=0;i<tessVertices.size();i++){
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, tessVertices[i].vboId);
+			glEnableClientState(GL_VERTEX_ARRAY);                 // activate vertex coords array
+			glVertexPointer(3, GL_FLOAT, 0, 0);                   // last param is offset, not ptr
+			glDrawArrays(tessVertices[i].shapeType, 0, tessVertices[i].tessVertices.size());
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+		}
 
 		//Vertex array
-		/*glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, 0, &newVertices[0]);
-		glDrawArrays(shapeType, 0, newVertices.size()/3);*/
+		/*for(unsigned i=0;i<tessVertices.size();i++){
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glVertexPointer(3, GL_FLOAT, 0, &(tessVertices[i].tessVertices[0]));
+			glDrawArrays(tessVertices[i].shapeType, 0, tessVertices[i].tessVertices.size()/3);
+		}*/
 
 
 		//if (bSmoothHinted && drawMode == OF_OUTLINE) endSmoothing();
@@ -171,9 +175,9 @@ public:
 	void scale(const ofPoint & scale){
 		for(unsigned i=0; i<points.size(); i++){
 			points[i] *= scale;
-			newVertices[i*3] *= scale.x;
-			newVertices[i*3+1]*=scale.y;
-			newVertices[i*3+2]*=scale.z;
+			newVertices[i][0] *= scale.x;
+			newVertices[i][1] *= scale.y;
+			newVertices[i][2] *= scale.z;
 		}
 		uploadVBO();
 	}
@@ -215,10 +219,15 @@ public:
 
 
 private:
+	struct tesselation{
+		vector<float> tessVertices;
+		GLint shapeType;
+		GLuint vboId;
+	};
 	int drawMode;
-	vector <float> newVertices;
+	vector <double*> newVertices;
 	vector <double*> curveVertices;
-	vector <GLdouble> tessVertices;
+	vector < tesselation > tessVertices;
 	int currentStartVertex;
 	bool bIsConvex;
 	GLint shapeType;
@@ -231,13 +240,15 @@ private:
 	//static int lastid;
 
 	void uploadVBO(){
-		if(bIsVBOUploaded){
-			glDeleteBuffersARB(1, &vboId);
+		for(int i=0; i<tessVertices.size(); i++){
+			if(bIsVBOUploaded){
+				glDeleteBuffersARB(1, &(tessVertices[i].vboId));
+			}
+			glGenBuffersARB(1, &(tessVertices[i].vboId));
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, tessVertices[i].vboId);
+			glBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(float)*tessVertices[i].tessVertices.size(), &(tessVertices[i].tessVertices[0]), GL_STATIC_DRAW_ARB);
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 		}
-		glGenBuffersARB(1, &vboId);
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vboId);
-		glBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(float)*newVertices.size(), &newVertices[0], GL_STATIC_DRAW_ARB);
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 		bIsVBOUploaded = true;
 	}
 
@@ -326,11 +337,11 @@ private:
 		points.clear();
 
 		// combine callback also makes new vertices, let's clear them:
-		/*for(vector<double*>::iterator itr=newVertices.begin();
+		for(vector<double*>::iterator itr=newVertices.begin();
 			itr!=newVertices.end();
 			++itr){
 			delete [] (*itr);
-		}*/
+		}
 		newVertices.clear();
 
 		clearCurveVertices();
@@ -339,13 +350,6 @@ private:
 	}
 
 	void clearTessVertices(){
-		// -------------------------------------------------
-	    // ---------------- delete newly created vertices !
-	   /* for(vector<double*>::iterator itr=tessVertices.begin();
-	        itr!=tessVertices.end();
-	        ++itr){
-	        delete [] (*itr);
-	    }*/
 	    tessVertices.clear();
 
 	}
@@ -371,8 +375,9 @@ private:
 	//----------------------------------------------------------
 	static void CALLBACK tessBegin(GLint type, void * shape_ptr){
 		ofShape * shape = (ofShape*)shape_ptr;
-		shape->shapeType = type;
-		shape->tessVertices.clear();
+		tesselation tess;
+		tess.shapeType = type;
+		shape->tessVertices.push_back(tess);
 	}
 
 	//----------------------------------------------------------
@@ -384,9 +389,9 @@ private:
 	//----------------------------------------------------------
 	static void CALLBACK tessVertex( void* data, void * shape_ptr){
 		ofShape * shape = (ofShape*)shape_ptr;
-		shape->tessVertices.push_back( ( (double*)data )[0] );
-		shape->tessVertices.push_back( ( (double*)data )[1] );
-		shape->tessVertices.push_back( ( (double*)data )[2] );	//No need for z for now?
+		shape->tessVertices.back().tessVertices.push_back( ( (double*)data )[0] );
+		shape->tessVertices.back().tessVertices.push_back( ( (double*)data )[1] );
+		shape->tessVertices.back().tessVertices.push_back( ( (double*)data )[2] );	//No need for z for now?
 	}
 
 
