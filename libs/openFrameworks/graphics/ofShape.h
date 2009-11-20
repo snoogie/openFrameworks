@@ -38,16 +38,20 @@ public:
 		//id=lastid++;
 		id = -1;
 		//TODO: implement id in .cpp
-		currentStartVertex=0;
 		polyMode = OF_POLY_WINDING_ODD;
 		drawMode = OF_OUTLINE;
+		curveResolution = 20;
 		noFill();
 	}
 	virtual ~ofShape(){}
 
+	void setCurveResolution(float _curveResolution){
+		curveResolution = _curveResolution;
+	}
 
 	void beginShape(int _polyMode = OF_POLY_WINDING_ODD){
 		clearVertices();
+		clearTessVertices();
 		polyMode = _polyMode;
 	}
 
@@ -75,18 +79,187 @@ public:
 	}
 
 	void vertex(float x, float y, float z=0){
+
 		vertex(ofPoint(x,y,z));
+	}
+
+
+
+
+	void curveVertex(const ofPoint & point){
+
+		/*curveVertices.push_back(point);
+
+		if (curveVertices.size() >= 4){
+
+			int startPos = (int)curveVertices.size() - 4;
+
+			ofPoint p0 = curveVertices[startPos + 0];
+			ofPoint p1 = curveVertices[startPos + 1];
+			ofPoint p2 = curveVertices[startPos + 2];
+			ofPoint p3 = curveVertices[startPos + 3];
+
+
+			float t,t2,t3;
+			ofPoint vertex;
+
+			for (int i = 0; i < curveResolution; i++){
+
+				t 	=  (float)i / (float)(curveResolution-1);
+				t2 	= t * t;
+				t3 	= t2 * t;
+
+				vertex.x = 0.5f * ( ( 2.0f * p1.x ) +
+				( -p0.x + p2.x ) * t +
+				( 2.0f * p0.x - 5.0f * p1.x + 4 * p2.x - p3.x ) * t2 +
+				( -p0.x + 3.0f * p1.x - 3.0f * p2.x + p3.x ) * t3 );
+
+				vertex.y = 0.5f * ( ( 2.0f * p1.y ) +
+				( -p0.y + p2.y ) * t +
+				( 2.0f * p0.y - 5.0f * p1.y + 4 * p2.y - p3.y ) * t2 +
+				( -p0.y + 3.0f * p1.y - 3.0f * p2.y + p3.y ) * t3 );
+
+				vertex.z = 0.5f * ( ( 2.0f * p1.z ) +
+				( -p0.z + p2.z ) * t +
+				( 2.0f * p0.z - 5.0f * p1.z + 4 * p2.z - p3.z ) * t2 +
+				( -p0.z + 3.0f * p1.z - 3.0f * p2.z + p3.z ) * t3 );
+
+
+				points.push_back(vertex);
+
+				double* point = new double[3];
+				point[0] = vertex.x;
+				point[1] = vertex.y;
+				point[2] = vertex.z;
+				newVertices.push_back(point);
+			}
+		}*/
+	}
+
+	//TODO: 3d
+	/*void curveVertex(float x, float y, float z=0){
+		curveVertex(ofPoint(x,y,z));
+
+
+	}*/
+	void curveVertex(float x, float y, float z=0){
+
+		double* point = new double[3];
+	 	point[0] = x;
+		point[1] = y;
+		point[2] = 0;
+	 	curveVertices.push_back(point);
+
+	 	if (curveVertices.size() >= 4){
+
+	 		int startPos = (int)curveVertices.size() - 4;
+
+	 		float x0 = curveVertices[startPos + 0][0];
+		   	float y0 = curveVertices[startPos + 0][1];
+	 		float x1 = curveVertices[startPos + 1][0];
+		   	float y1 = curveVertices[startPos + 1][1];
+	 		float x2 = curveVertices[startPos + 2][0];
+		   	float y2 = curveVertices[startPos + 2][1];
+	 		float x3 = curveVertices[startPos + 3][0];
+		   	float y3 = curveVertices[startPos + 3][1];
+
+	 		int resolution = curveResolution;
+
+			float t,t2,t3;
+			float x,y;
+
+			for (int i = 0; i < resolution; i++){
+
+				t 	=  (float)i / (float)(resolution-1);
+				t2 	= t * t;
+				t3 	= t2 * t;
+
+				x = 0.5f * ( ( 2.0f * x1 ) +
+				( -x0 + x2 ) * t +
+				( 2.0f * x0 - 5.0f * x1 + 4 * x2 - x3 ) * t2 +
+				( -x0 + 3.0f * x1 - 3.0f * x2 + x3 ) * t3 );
+
+				y = 0.5f * ( ( 2.0f * y1 ) +
+				( -y0 + y2 ) * t +
+				( 2.0f * y0 - 5.0f * y1 + 4 * y2 - y3 ) * t2 +
+				( -y0 + 3.0f * y1 - 3.0f * y2 + y3 ) * t3 );
+
+				/*double* newPoint = new double[3];
+				newPoint[0] = x;
+				newPoint[1] = y;
+				newPoint[2] = 0;
+				polyVertices.push_back(newPoint);*/
+
+				points.push_back(ofPoint(x,y,0));
+
+				double* newPoint = new double[3];
+				newPoint[0] = x;
+				newPoint[1] = y;
+				newPoint[2] = 0;
+				newVertices.push_back(newPoint);
+			}
+	 	}
+
+	}
+	//TODO: 3d and call with 3 points
+	void bezierVertex(float x1, float y1, float x2, float y2, float x3, float y3){
+
+
+		clearCurveVertices();	// we drop any stored "curve calls"
+
+
+		// if, and only if poly vertices has points, we can make a bezier
+		// from the last point
+
+		// the resolultion with which we computer this bezier
+		// is arbitrary, can we possibly make it dynamic?
+
+		if (newVertices.size() > 0){
+
+			float x0 = newVertices[newVertices.size()-1][0];
+			float y0 = newVertices[newVertices.size()-1][1];
+
+			float   ax, bx, cx;
+			float   ay, by, cy;
+			float   t, t2, t3;
+			float   x, y;
+
+			// polynomial coefficients
+			cx = 3.0f * (x1 - x0);
+			bx = 3.0f * (x2 - x1) - cx;
+			ax = x3 - x0 - cx - bx;
+
+			cy = 3.0f * (y1 - y0);
+			by = 3.0f * (y2 - y1) - cy;
+			ay = y3 - y0 - cy - by;
+
+			// arbitrary ! can we fix??
+			int resolution = curveResolution;
+
+			for (int i = 0; i < resolution; i++){
+				t 	=  (float)i / (float)(resolution-1);
+				t2 = t * t;
+				t3 = t2 * t;
+				x = (ax * t3) + (bx * t2) + (cx * t) + x0;
+				y = (ay * t3) + (by * t2) + (cy * t) + y0;
+				vertex(x,y);
+			}
+
+
+		}
+
+
 	}
 
 	void endShape(bool bClose){
 		bIsConvex = isConvex();
 
-		// TODO: Not working! (close -> add the first point to the end)
+		// (close -> add the first point to the end)
 		// -----------------------------------------------
 		if ((bClose == true)){
 			//---------------------------
-			if ((int)points.size() > currentStartVertex && points.back() != points[currentStartVertex]){
-				vertex(points[currentStartVertex]);
+			if ((int)points.size() > 0 && points.back() != points[0]){
+				vertex(points[0]);
 			}
 		}
 
@@ -94,13 +267,13 @@ public:
 		ofLog(OF_LOG_VERBOSE,"ending a shape of %i points",points.size());
 		if(((polyMode == OF_POLY_WINDING_ODD) && (drawMode == OF_OUTLINE)) || bIsConvex){
 			tesselation tess;
-			tess.shapeType = (drawMode == OF_FILLED) ? GL_TRIANGLE_FAN : GL_LINE_STRIP;;
+			tess.shapeType = (drawMode == OF_FILLED) ? GL_TRIANGLE_FAN : GL_LINE_STRIP;
 			tessVertices.push_back(tess);
 			for(unsigned i=0; i<points.size(); i++){
-				ofPoint point;
-				tessVertices[0].tessVertices[i*3]   = point.x;
-				tessVertices[0].tessVertices[i*3+1] = point.y;
-				tessVertices[0].tessVertices[i*3+2] = point.z;
+				ofLog(OF_LOG_VERBOSE,"generating point: %i: %.02f,%.02f",i,points[i].x,points[i].y);
+				tessVertices[0].tessVertices.push_back( points[i].x );
+				tessVertices[0].tessVertices.push_back( points[i].y );
+				tessVertices[0].tessVertices.push_back( points[i].z );
 			}
 		}else{
 			startTess();
@@ -108,7 +281,6 @@ public:
 				gluTessBeginContour( tesselator);
 				for (unsigned i=0; i<points.size(); i++) {
 					ofLog(OF_LOG_VERBOSE,"generating point: %i",i);
-
 					gluTessVertex( tesselator, newVertices[i], newVertices[i]);
 				}
 				gluTessEndContour( tesselator);
@@ -116,7 +288,7 @@ public:
 			}
 			endTess();
 
-			clearVertices();
+			//clearVertices();
 		}
 
 		uploadVBO();
@@ -132,14 +304,14 @@ public:
 			glBindBufferARB(GL_ARRAY_BUFFER_ARB, tessVertices[i].vboId);
 			glEnableClientState(GL_VERTEX_ARRAY);                 // activate vertex coords array
 			glVertexPointer(3, GL_FLOAT, 0, 0);                   // last param is offset, not ptr
-			glDrawArrays(tessVertices[i].shapeType, 0, tessVertices[i].tessVertices.size());
+			glDrawArrays(tessVertices[i].shapeType, 0, tessVertices[i].tessVertices.size()/3);
 			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 		}
 
 		//Vertex array
 		/*for(unsigned i=0;i<tessVertices.size();i++){
 			glEnableClientState(GL_VERTEX_ARRAY);
-			glVertexPointer(3, GL_FLOAT, 0, &(tessVertices[i].tessVertices[0]));
+			glVertexPointer(3, GL_FLOAT, 0, tessVertices[i].tessVertices.data());
 			glDrawArrays(tessVertices[i].shapeType, 0, tessVertices[i].tessVertices.size()/3);
 		}*/
 
@@ -157,27 +329,30 @@ public:
 
 	void translate(float x, float y, float z=0){
 		translate(ofPoint(x,y,z));
-		uploadVBO();
 	}
 
 	void translate(const ofPoint & offset){
-		for(unsigned i=0; i<points.size(); i++){
-			points[i] += offset;
+		for(unsigned i=0; i<tessVertices.size(); i++){
+			for(unsigned j=0; j<tessVertices[i].tessVertices.size()/3; j++){
+				tessVertices[i].tessVertices[j*3]+=offset.x;
+				tessVertices[i].tessVertices[j*3+1]+=offset.y;
+				tessVertices[i].tessVertices[j*3+2]+=offset.z;
+			}
 		}
 		uploadVBO();
 	}
 
 	void scale(float x, float y, float z=1){
 		scale(ofPoint(x,y,z));
-		uploadVBO();
 	}
 
 	void scale(const ofPoint & scale){
-		for(unsigned i=0; i<points.size(); i++){
-			points[i] *= scale;
-			newVertices[i][0] *= scale.x;
-			newVertices[i][1] *= scale.y;
-			newVertices[i][2] *= scale.z;
+		for(unsigned i=0; i<tessVertices.size(); i++){
+			for(unsigned j=0; j<tessVertices[i].tessVertices.size()/3; j++){
+				tessVertices[i].tessVertices[j*3]*=scale.x;
+				tessVertices[i].tessVertices[j*3+1]*=scale.y;
+				tessVertices[i].tessVertices[j*3+2]*=scale.z;
+			}
 		}
 		uploadVBO();
 	}
@@ -220,36 +395,47 @@ public:
 
 private:
 	struct tesselation{
+		tesselation(){
+			bIsVBOUploaded = false;
+		}
+
+		~tesselation(){
+			if(bIsVBOUploaded)
+				glDeleteBuffersARB(1, &vboId);
+		}
+
+		void uploadVBO(){
+			if(bIsVBOUploaded)
+				glDeleteBuffersARB(1, &vboId);
+			glGenBuffersARB(1, &vboId);
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, vboId);
+			glBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(float)*tessVertices.size(), tessVertices.data(), GL_STATIC_DRAW_ARB);
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+			bIsVBOUploaded = true;
+		}
+
 		vector<float> tessVertices;
 		GLint shapeType;
 		GLuint vboId;
+		bool bIsVBOUploaded;
 	};
+
 	int drawMode;
 	vector <double*> newVertices;
 	vector <double*> curveVertices;
 	vector < tesselation > tessVertices;
-	int currentStartVertex;
 	bool bIsConvex;
-	GLint shapeType;
 	int polyMode;
 	GLUtesselator * tesselator;
-	GLuint vboId;
-	bool bIsVBOUploaded;
+	int curveResolution;
 
 
 	//static int lastid;
 
 	void uploadVBO(){
-		for(int i=0; i<tessVertices.size(); i++){
-			if(bIsVBOUploaded){
-				glDeleteBuffersARB(1, &(tessVertices[i].vboId));
-			}
-			glGenBuffersARB(1, &(tessVertices[i].vboId));
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB, tessVertices[i].vboId);
-			glBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(float)*tessVertices[i].tessVertices.size(), &(tessVertices[i].tessVertices[0]), GL_STATIC_DRAW_ARB);
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+		for(unsigned i=0; i<tessVertices.size(); i++){
+			tessVertices[i].uploadVBO();
 		}
-		bIsVBOUploaded = true;
 	}
 
 	void startTess(){
@@ -335,8 +521,6 @@ private:
 
 	void clearVertices(){
 		points.clear();
-
-		// combine callback also makes new vertices, let's clear them:
 		for(vector<double*>::iterator itr=newVertices.begin();
 			itr!=newVertices.end();
 			++itr){
@@ -344,25 +528,25 @@ private:
 		}
 		newVertices.clear();
 
+
 		clearCurveVertices();
 
-		currentStartVertex = 0;
 	}
 
 	void clearTessVertices(){
 	    tessVertices.clear();
-
 	}
 
 	void clearCurveVertices(){
 		// combine callback also makes new vertices, let's clear them:
-	    for(vector<double*>::iterator itr=curveVertices.begin();
+	   /* for(vector<double*>::iterator itr=curveVertices.begin();
 	        itr!=curveVertices.end();
 	        ++itr){
 	        delete [] (*itr);
-	    }
+	    }*/
 	    curveVertices.clear();
 	}
+
 	//----------------------------------------------------------
 	static void CALLBACK tessError(GLenum errCode, void * shape_ptr){
 		ofShape * shape = (ofShape*)shape_ptr;
@@ -383,6 +567,7 @@ private:
 	//----------------------------------------------------------
 	static void CALLBACK tessEnd(void * shape_ptr){
 		ofShape * shape = (ofShape*)shape_ptr;
+		ofLog(OF_LOG_VERBOSE, "tesselation generated " + ofToString((int)shape->tessVertices.size()) + " shapes");
 	}
 
 
