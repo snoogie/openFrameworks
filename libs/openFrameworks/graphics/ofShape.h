@@ -63,7 +63,7 @@ public:
 		point[0] = vertex.x;
 		point[1] = vertex.y;
 		point[2] = vertex.z;
-		newVertices.push_back(point);
+		polyVertices.push_back(point);
 
 
 		clearCurveVertices();	// we drop any "curve calls"
@@ -83,21 +83,23 @@ public:
 		vertex(ofPoint(x,y,z));
 	}
 
-
+	void curveVertex(float x, float y, float z){
+		curveVertex(ofPoint(x,y,z));
+	}
 
 
 	void curveVertex(const ofPoint & point){
 
-		/*curveVertices.push_back(point);
+		curveVertices.push_back(point);
 
 		if (curveVertices.size() >= 4){
 
 			int startPos = (int)curveVertices.size() - 4;
 
-			ofPoint p0 = curveVertices[startPos + 0];
-			ofPoint p1 = curveVertices[startPos + 1];
-			ofPoint p2 = curveVertices[startPos + 2];
-			ofPoint p3 = curveVertices[startPos + 3];
+			ofPoint & p0 = curveVertices[startPos + 0];
+			ofPoint & p1 = curveVertices[startPos + 1];
+			ofPoint & p2 = curveVertices[startPos + 2];
+			ofPoint & p3 = curveVertices[startPos + 3];
 
 
 			float t,t2,t3;
@@ -131,9 +133,9 @@ public:
 				point[0] = vertex.x;
 				point[1] = vertex.y;
 				point[2] = vertex.z;
-				newVertices.push_back(point);
+				polyVertices.push_back(point);
 			}
-		}*/
+		}
 	}
 
 	//TODO: 3d
@@ -142,7 +144,7 @@ public:
 
 
 	}*/
-	void curveVertex(float x, float y, float z=0){
+	/*void curveVertex(float x, float y, float z=0){
 
 		double* point = new double[3];
 	 	point[0] = x;
@@ -184,23 +186,18 @@ public:
 				( 2.0f * y0 - 5.0f * y1 + 4 * y2 - y3 ) * t2 +
 				( -y0 + 3.0f * y1 - 3.0f * y2 + y3 ) * t3 );
 
-				/*double* newPoint = new double[3];
-				newPoint[0] = x;
-				newPoint[1] = y;
-				newPoint[2] = 0;
-				polyVertices.push_back(newPoint);*/
-
 				points.push_back(ofPoint(x,y,0));
 
 				double* newPoint = new double[3];
 				newPoint[0] = x;
 				newPoint[1] = y;
 				newPoint[2] = 0;
-				newVertices.push_back(newPoint);
+				polyVertices.push_back(newPoint);
 			}
 	 	}
 
-	}
+	}*/
+
 	//TODO: 3d and call with 3 points
 	void bezierVertex(float x1, float y1, float x2, float y2, float x3, float y3){
 
@@ -214,10 +211,10 @@ public:
 		// the resolultion with which we computer this bezier
 		// is arbitrary, can we possibly make it dynamic?
 
-		if (newVertices.size() > 0){
+		if (polyVertices.size() > 0){
 
-			float x0 = newVertices[newVertices.size()-1][0];
-			float y0 = newVertices[newVertices.size()-1][1];
+			float x0 = polyVertices[polyVertices.size()-1][0];
+			float y0 = polyVertices[polyVertices.size()-1][1];
 
 			float   ax, bx, cx;
 			float   ay, by, cy;
@@ -264,13 +261,13 @@ public:
 		}
 
 
-		ofLog(OF_LOG_VERBOSE,"ending a shape of %i points",points.size());
+		//ofLog(OF_LOG_VERBOSE,"ending a shape of %i points",points.size());
 		if(((polyMode == OF_POLY_WINDING_ODD) && (drawMode == OF_OUTLINE)) || bIsConvex){
 			tesselation tess;
 			tess.shapeType = (drawMode == OF_FILLED) ? GL_TRIANGLE_FAN : GL_LINE_STRIP;
 			tessVertices.push_back(tess);
 			for(unsigned i=0; i<points.size(); i++){
-				ofLog(OF_LOG_VERBOSE,"generating point: %i: %.02f,%.02f",i,points[i].x,points[i].y);
+				//ofLog(OF_LOG_VERBOSE,"generating point: %i: %.02f,%.02f",i,points[i].x,points[i].y);
 				tessVertices[0].tessVertices.push_back( points[i].x );
 				tessVertices[0].tessVertices.push_back( points[i].y );
 				tessVertices[0].tessVertices.push_back( points[i].z );
@@ -280,8 +277,8 @@ public:
 			if ( tesselator != NULL){
 				gluTessBeginContour( tesselator);
 				for (unsigned i=0; i<points.size(); i++) {
-					ofLog(OF_LOG_VERBOSE,"generating point: %i",i);
-					gluTessVertex( tesselator, newVertices[i], newVertices[i]);
+					//ofLog(OF_LOG_VERBOSE,"generating point: %i",i);
+					gluTessVertex( tesselator, polyVertices[i], polyVertices[i]);
 				}
 				gluTessEndContour( tesselator);
 
@@ -421,8 +418,8 @@ private:
 	};
 
 	int drawMode;
-	vector <double*> newVertices;
-	vector <double*> curveVertices;
+	vector <double*> polyVertices;
+	vector <ofPoint> curveVertices;
 	vector < tesselation > tessVertices;
 	bool bIsConvex;
 	int polyMode;
@@ -521,12 +518,12 @@ private:
 
 	void clearVertices(){
 		points.clear();
-		for(vector<double*>::iterator itr=newVertices.begin();
-			itr!=newVertices.end();
+		for(vector<double*>::iterator itr=polyVertices.begin();
+			itr!=polyVertices.end();
 			++itr){
 			delete [] (*itr);
 		}
-		newVertices.clear();
+		polyVertices.clear();
 
 
 		clearCurveVertices();
@@ -538,12 +535,6 @@ private:
 	}
 
 	void clearCurveVertices(){
-		// combine callback also makes new vertices, let's clear them:
-	   /* for(vector<double*>::iterator itr=curveVertices.begin();
-	        itr!=curveVertices.end();
-	        ++itr){
-	        delete [] (*itr);
-	    }*/
 	    curveVertices.clear();
 	}
 
@@ -567,7 +558,7 @@ private:
 	//----------------------------------------------------------
 	static void CALLBACK tessEnd(void * shape_ptr){
 		ofShape * shape = (ofShape*)shape_ptr;
-		ofLog(OF_LOG_VERBOSE, "tesselation generated " + ofToString((int)shape->tessVertices.size()) + " shapes");
+		//ofLog(OF_LOG_VERBOSE, "tesselation generated " + ofToString((int)shape->tessVertices.size()) + " shapes");
 	}
 
 
