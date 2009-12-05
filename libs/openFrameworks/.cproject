@@ -37,7 +37,6 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/rtAudio/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/glee/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/FreeImage/include}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/include/freetype2}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/unicap/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/poco/include}&quot;"/>
@@ -53,6 +52,9 @@
 <listOptionValue builtIn="false" value="/usr/include/ffmpeg"/>
 <listOptionValue builtIn="false" value="/usr/include/glib-2.0"/>
 <listOptionValue builtIn="false" value="/usr/lib/glib-2.0/include"/>
+<listOptionValue builtIn="false" value="/usr/include/hal"/>
+<listOptionValue builtIn="false" value="/usr/include/dbus-1.0"/>
+<listOptionValue builtIn="false" value="/usr/lib/dbus-1.0/include/"/>
 </option>
 <option id="gnu.cpp.compiler.option.preprocessor.nostdinc.1712044746" name="Do not search system directories (-nostdinc)" superClass="gnu.cpp.compiler.option.preprocessor.nostdinc"/>
 <option id="gnu.cpp.compiler.option.preprocessor.preprocess.1222979141" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess"/>
@@ -916,7 +918,7 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactExtension="a" artifactName="openFrameworks" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804" name="Debug Mac OS X" parent="cdt.managedbuild.config.gnu.exe.debug" postannouncebuildStep="" postbuildStep="ranlib &quot;${workspace_loc:openFrameworks}/Debug Mac OS X/libopenFrameworks.a&quot;" preannouncebuildStep="" prebuildStep="">
+<configuration artifactExtension="a" artifactName="openFrameworks" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804" name="Debug Mac OS X" parent="cdt.managedbuild.config.gnu.exe.debug" postannouncebuildStep="" postbuildStep="ranlib &quot;${workspace_loc}/openFrameworks/libs/openFrameworks/Debug Mac OS X/libopenFrameworks.a&quot;" preannouncebuildStep="" prebuildStep="">
 <folderInfo id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.568785619" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.debug.1261249185" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.debug"/>
@@ -1811,7 +1813,7 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactExtension="a" artifactName="openFrameworks" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804.102792854" name="Release Mac OS X" parent="cdt.managedbuild.config.gnu.exe.debug" postannouncebuildStep="" postbuildStep="ranlib &quot;${workspace_loc:openFrameworks}/Release Mac OS X/libopenFrameworks.a&quot;" preannouncebuildStep="" prebuildStep="">
+<configuration artifactExtension="a" artifactName="openFrameworks" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804.102792854" name="Release Mac OS X" parent="cdt.managedbuild.config.gnu.exe.debug" postannouncebuildStep="" postbuildStep="ranlib &quot;${workspace_loc}/openFrameworks/libs/openFrameworks/Release Mac OS X/libopenFrameworks.a&quot;" preannouncebuildStep="" prebuildStep="">
 <folderInfo id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804.102792854." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.132772552" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.debug.1989772496" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.debug"/>
@@ -2711,7 +2713,7 @@
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.325669265" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.debug.225753880" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.debug"/>
 <builder buildPath="${workspace_loc:/openFrameworks/Release}" id="cdt.managedbuild.target.gnu.builder.exe.debug.1848760785" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.debug"/>
-<tool command="ar" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.gnu.archiver.base.185506306" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base">
+<tool id="cdt.managedbuild.tool.gnu.archiver.base.185506306" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base">
 <option id="gnu.both.lib.option.flags.347505496" name="Archiver flags" superClass="gnu.both.lib.option.flags"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1962469362" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug">
@@ -2722,7 +2724,6 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/rtAudio/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/glee/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/FreeImage/include}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/include/freetype2}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/unicap/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/poco/include}&quot;"/>
@@ -2738,6 +2739,9 @@
 <listOptionValue builtIn="false" value="/usr/include/ffmpeg"/>
 <listOptionValue builtIn="false" value="/usr/include/glib-2.0"/>
 <listOptionValue builtIn="false" value="/usr/lib/glib-2.0/include"/>
+<listOptionValue builtIn="false" value="/usr/include/hal"/>
+<listOptionValue builtIn="false" value="/usr/include/dbus-1.0"/>
+<listOptionValue builtIn="false" value="/usr/lib/dbus-1.0/include/"/>
 </option>
 <option id="gnu.cpp.compiler.option.preprocessor.nostdinc.92478560" name="Do not search system directories (-nostdinc)" superClass="gnu.cpp.compiler.option.preprocessor.nostdinc"/>
 <option id="gnu.cpp.compiler.option.preprocessor.preprocess.1594616160" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess"/>
@@ -2745,7 +2749,7 @@
 <listOptionValue builtIn="false" value="OF_ECLIPSE"/>
 </option>
 <option id="gnu.cpp.compiler.option.preprocessor.undef.2131722770" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef"/>
-<option id="gnu.cpp.compiler.option.optimization.flags.803081510" name="Other optimization flags" superClass="gnu.cpp.compiler.option.optimization.flags" value="-march=native -mtune=native -mmmx -msse -msse2 -msse3 -fopenmp" valueType="string"/>
+<option id="gnu.cpp.compiler.option.optimization.flags.803081510" name="Other optimization flags" superClass="gnu.cpp.compiler.option.optimization.flags" value="-march=native" valueType="string"/>
 <option id="gnu.cpp.compiler.option.debugging.other.1653959016" name="Other debugging flags" superClass="gnu.cpp.compiler.option.debugging.other"/>
 <option id="gnu.cpp.compiler.option.debugging.prof.1422054592" name="Generate prof information (-p)" superClass="gnu.cpp.compiler.option.debugging.prof"/>
 <option id="gnu.cpp.compiler.option.debugging.gprof.146685553" name="Generate gprof information (-pg)" superClass="gnu.cpp.compiler.option.debugging.gprof"/>
