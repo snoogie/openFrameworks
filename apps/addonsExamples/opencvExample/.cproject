@@ -2125,12 +2125,12 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/ofxOsc/libs/oscpack/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/gstappsink/lib}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/ofxOpenCv/libs/opencv/lib/linux64}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/Debug Linux}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/Release Linux}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/fmodex/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/rtAudio/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/glee/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/poco/lib/linux64}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/Debug Linux}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/Release Linux}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/unicap/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/FreeImage/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/lib/linux64}&quot;"/>
