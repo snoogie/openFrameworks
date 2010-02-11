@@ -11,6 +11,7 @@
 <entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/openFrameworks/Release"/>
 <entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/openFrameworks/Debug"/>
 <entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/openFrameworks"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/openFrameworks/Debug Linux"/>
 </externalSetting>
 </externalSettings>
 <extensions>
@@ -35,6 +36,7 @@
 <option id="gnu.cpp.compiler.option.include.paths.390906970" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/fmodex/inc}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/rtAudio/include}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/portaudio/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/glee/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/FreeImage/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/include/freetype2}&quot;"/>
@@ -899,6 +901,7 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
+<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cconfiguration>
 <cconfiguration id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804">
 <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804" moduleId="org.eclipse.cdt.core.settings" name="Debug Mac OS X">
@@ -1793,6 +1796,7 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
+<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cconfiguration>
 <cconfiguration id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804.102792854">
 <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.1807060804.102792854" moduleId="org.eclipse.cdt.core.settings" name="Release Mac OS X">
@@ -2688,6 +2692,7 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
+<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cconfiguration>
 <cconfiguration id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.608816709.938619799">
 <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.debug.1027595862.1402839088.608816709.938619799" moduleId="org.eclipse.cdt.core.settings" name="Release Linux">
@@ -2737,6 +2742,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/graphics}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/app}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/portaudio/include}&quot;"/>
 <listOptionValue builtIn="false" value="/usr/include/gstreamer-0.10"/>
 <listOptionValue builtIn="false" value="/usr/include/ffmpeg"/>
 <listOptionValue builtIn="false" value="/usr/include/glib-2.0"/>
@@ -2827,7 +2833,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="sound/ofSoundPlayer.h|sound/ofSoundPlayer.cpp|app/ofAppGlutGlue.h|sound/ofSoundStream4.cpp|sound/ofSoundStream3.cpp|events/ofMouseEvents.h|events/ofMouseEvents.cpp|events/ofKeyEvents.h|events/ofKeyEvents.cpp|events/ofAudioEvents.h|events/ofAudioEvents.cpp|events/ofAppEvents.cpp|events/ofAppEvents.h" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="sound/ofSoundStream.cpp|sound/ofSoundPlayer.h|sound/ofSoundPlayer.cpp|app/ofAppGlutGlue.h|sound/ofSoundStream4.cpp|sound/ofSoundStream3.cpp|events/ofMouseEvents.h|events/ofMouseEvents.cpp|events/ofKeyEvents.h|events/ofKeyEvents.cpp|events/ofAudioEvents.h|events/ofAudioEvents.cpp|events/ofAppEvents.cpp|events/ofAppEvents.h" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -3587,6 +3593,7 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
+<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cconfiguration>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">

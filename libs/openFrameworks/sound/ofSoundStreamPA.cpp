@@ -88,29 +88,52 @@ void ofSoundStreamSetup(int nOutputs, int nInputs, ofBaseApp * OFSA, int sampleR
 
 	PaError err;
 	err = Pa_Initialize();
-	if( err != paNoError )
-		ofLog(OF_LOG_ERROR,"PortAudio error: %s\n",Pa_GetErrorText( err ));
+	if( err != paNoError ){
+		ofLog(OF_LOG_ERROR,"PortAudio error initializing: %s\n",Pa_GetErrorText( err ));
+		return;
+	}
 
+	/*PaStreamParameters outStreamParameters, inStreamParameters;
+	PaSampleFormat sampleFormat = paFloat32;
+	outStreamParameters.channelCount = nOutputs;
+	outStreamParameters.device = 0;
+	outStreamParameters.sampleFormat = sampleFormat;
+	outStreamParameters.suggestedLatency = 0;
+	outStreamParameters.hostApiSpecificStreamInfo = NULL;
 
+	inStreamParameters.channelCount = nInputs;
+	inStreamParameters.device = 0;
+	inStreamParameters.sampleFormat = sampleFormat;
+	inStreamParameters.suggestedLatency = 0;
+	inStreamParameters.hostApiSpecificStreamInfo = NULL;
+
+	PaStreamFlags flags = paNoFlag;
+
+	err = Pa_OpenStream(&stream,NULL,&outStreamParameters,sampleRate,bufferSize,flags,&receiveAudioBufferAndCallSimpleApp,NULL);*/
 	err = Pa_OpenDefaultStream( &stream,
-									nInputChannels,          /* no input channels */
-									nOutputChannels,          /* stereo output */
-									paFloat32,  /* 64 bit floating point output */
+									nInputChannels,          // no input channels
+									nOutputChannels,          // stereo output
+									paFloat32,  // 64 bit floating point output
 									sampleRate,
-									bufferSize,        /* frames per buffer, i.e. the number
-													   of sample frames that PortAudio will
-													   request from the callback. Many apps
-													   may want to use
-													   paFramesPerBufferUnspecified, which
-													   tells PortAudio to pick the best,
-													   possibly changing, buffer size.*/
-									&receiveAudioBufferAndCallSimpleApp, /* this is your callback function */
-									NULL ); /*This is a pointer that will be passed to
-													   your callback*/
+									bufferSize,        // frames per buffer, i.e. the number
+													   // of sample frames that PortAudio will
+													   // request from the callback. Many apps
+													   // may want to use
+													   // paFramesPerBufferUnspecified, which
+													   // tells PortAudio to pick the best,
+													   // possibly changing, buffer size.
+									&receiveAudioBufferAndCallSimpleApp, // this is your callback function
+									NULL ); ///This is a pointer that will be passed to
+											//your callback
+	if( err != paNoError ){
+	   	ofLog(OF_LOG_ERROR,"PortAudio error creating stream: %s\n",Pa_GetErrorText( err ));
+	   	return;
+	}
 
 	err = Pa_StartStream( stream );
-    if( err != paNoError )
-    	ofLog(OF_LOG_ERROR,"PortAudio error: %s\n",Pa_GetErrorText( err ));
+    if( err != paNoError ){
+    	ofLog(OF_LOG_ERROR,"PortAudio error starting stream: %s\n",Pa_GetErrorText( err ));
+    }
 
 
 }
