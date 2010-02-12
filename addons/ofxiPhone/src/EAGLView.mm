@@ -231,8 +231,12 @@
 		touchArgs.x = touchPoint.x;
 		touchArgs.y = touchPoint.y;
 		touchArgs.id = touchIndex;
-		if([touch tapCount] == 2) ofNotifyEvent(ofEvents.touchDoubleTap,touchArgs);	// send doubletap
+		if([touch tapCount] == 2){
+			ofNotifyEvent(ofEvents.touchDoubleTap,touchArgs);	// send doubletap
+			((ofxiPhoneApp*)ofGetAppPtr())->touchDoubleTap(touchPoint.x, touchPoint.y, touchIndex);
+		}
 		ofNotifyEvent(ofEvents.touchDown,touchArgs);	// but also send tap (upto app programmer to ignore this if doubletap came that frame)
+		((ofxiPhoneApp*)ofGetAppPtr())->touchDown(touchPoint.x, touchPoint.y, touchIndex);
 	}
 	
 //	[self.nextResponder touchesBegan:touches withEvent:event];
@@ -264,6 +268,7 @@
 		touchArgs.y = touchPoint.y;
 		touchArgs.id = touchIndex;
 		ofNotifyEvent(ofEvents.touchMoved, touchArgs);
+		((ofxiPhoneApp*)ofGetAppPtr())->touchMoved(touchPoint.x, touchPoint.y, touchIndex);
 	}
 	
 //	[self.nextResponder touchesMoved:touches withEvent:event];
@@ -299,6 +304,7 @@
 		touchArgs.y = touchPoint.y;
 		touchArgs.id = touchIndex;
 		ofNotifyEvent(ofEvents.touchUp, touchArgs);
+		((ofxiPhoneApp*)ofGetAppPtr())->touchUp(touchPoint.x, touchPoint.y, touchIndex);
 	}
 //	[self.nextResponder touchesEnded:touches withEvent:event];
 }
@@ -326,6 +332,7 @@
 			touchArgs.y = touchPoint.y;
 			touchArgs.id = i;
 			ofNotifyEvent(ofEvents.touchUp, touchArgs);
+			((ofxiPhoneApp*)ofGetAppPtr())->touchUp(touchPoint.x, touchPoint.y, i);
 		}
 	}
 //	[self.nextResponder touchesCancelled:touches withEvent:event];

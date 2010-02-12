@@ -32,18 +32,5 @@ public:
 	void gotFocus() {}
 	void gotMemoryWarning() {}
 
-	virtual void touchDown(ofTouchEventArgs & touch) {
-		touchDown(touch.x, touch.y, touch.id);
-	};
-	virtual void touchMoved(ofTouchEventArgs & touch) {
-		touchMoved(touch.x, touch.y, touch.id);
-	};
-	virtual void touchUp(ofTouchEventArgs & touch) {
-		touchUp(touch.x, touch.y, touch.id);
-	};
-	virtual void touchDoubleTap(ofTouchEventArgs & touch) {
-		touchDoubleTap(touch.x, touch.y, touch.id);
-	};
-
 };
 
