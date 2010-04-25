@@ -19,7 +19,7 @@
 <folderInfo id="cdt.managedbuild.config.gnu.macosx.exe.debug.2024453957." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.macosx.exe.debug.1382271537" name="MacOSX GCC" nonInternalBuilderId="cdt.managedbuild.target.gnu.builder.macosx.exe.debug" superClass="cdt.managedbuild.toolchain.gnu.macosx.exe.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.macosx.exe.debug.1853979725" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.macosx.exe.debug"/>
-<builder buildPath="${workspace_loc:/moviePlayerExample/Debug Mac OS X}" id="cdt.managedbuild.target.gnu.builder.macosx.exe.debug.1722709938" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.macosx.exe.debug"/>
+<builder buildPath="${workspace_loc:/audioOutputExample/Debug Mac OS X}" id="cdt.managedbuild.target.gnu.builder.macosx.exe.debug.1722709938" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.macosx.exe.debug"/>
 <tool id="cdt.managedbuild.tool.macosx.c.linker.macosx.exe.debug.574479513" name="MacOS X C Linker" superClass="cdt.managedbuild.tool.macosx.c.linker.macosx.exe.debug"/>
 <tool id="cdt.managedbuild.tool.macosx.cpp.linker.macosx.exe.debug.1540472147" name="MacOS X C++ Linker" superClass="cdt.managedbuild.tool.macosx.cpp.linker.macosx.exe.debug">
 <option id="macosx.cpp.link.option.libs.546873351" name="Libraries (-l)" superClass="macosx.cpp.link.option.libs" valueType="libs">
@@ -542,7 +542,7 @@
 <folderInfo id="cdt.managedbuild.config.gnu.macosx.exe.debug.2024453957.738441335." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.macosx.exe.debug.1713623044" name="MacOSX GCC" superClass="cdt.managedbuild.toolchain.gnu.macosx.exe.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.macosx.exe.debug.1995268050" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.macosx.exe.debug"/>
-<builder buildPath="${workspace_loc:/moviePlayerExample/Debug}" id="cdt.managedbuild.target.gnu.builder.macosx.exe.debug.1248703719" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.macosx.exe.debug"/>
+<builder buildPath="${workspace_loc:/audioOutputExample/Debug}" id="cdt.managedbuild.target.gnu.builder.macosx.exe.debug.1248703719" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.macosx.exe.debug"/>
 <tool id="cdt.managedbuild.tool.macosx.c.linker.macosx.exe.debug.1698327472" name="MacOS X C Linker" superClass="cdt.managedbuild.tool.macosx.c.linker.macosx.exe.debug"/>
 <tool id="cdt.managedbuild.tool.macosx.cpp.linker.macosx.exe.debug.2113921317" name="MacOS X C++ Linker" superClass="cdt.managedbuild.tool.macosx.cpp.linker.macosx.exe.debug">
 <option id="macosx.cpp.link.option.libs.183261825" name="Libraries (-l)" superClass="macosx.cpp.link.option.libs" valueType="libs">
@@ -1553,7 +1553,6 @@
 <listOptionValue builtIn="false" value="PocoFoundation"/>
 <listOptionValue builtIn="false" value="GLee"/>
 <listOptionValue builtIn="false" value="glut"/>
-<listOptionValue builtIn="false" value="GLU"/>
 <listOptionValue builtIn="false" value="avcodec"/>
 <listOptionValue builtIn="false" value="avformat"/>
 <listOptionValue builtIn="false" value="avutil"/>
@@ -2107,16 +2106,19 @@
 <listOptionValue builtIn="false" value="freetype"/>
 <listOptionValue builtIn="false" value="pthread"/>
 <listOptionValue builtIn="false" value="asound"/>
+<listOptionValue builtIn="false" value="jack"/>
 <listOptionValue builtIn="false" value="openFrameworks"/>
 <listOptionValue builtIn="false" value="freeimage"/>
 <listOptionValue builtIn="false" value="PocoFoundation"/>
 <listOptionValue builtIn="false" value="GLee"/>
 <listOptionValue builtIn="false" value="glut"/>
+<listOptionValue builtIn="false" value="GLU"/>
 <listOptionValue builtIn="false" value="avcodec"/>
 <listOptionValue builtIn="false" value="avformat"/>
 <listOptionValue builtIn="false" value="avutil"/>
 <listOptionValue builtIn="false" value="swscale"/>
 <listOptionValue builtIn="false" value="RtAudio"/>
+<listOptionValue builtIn="false" value="portaudio"/>
 <listOptionValue builtIn="false" value="ofAddons"/>
 <listOptionValue builtIn="false" value="unicap"/>
 <listOptionValue builtIn="false" value="raw1394"/>
@@ -2132,6 +2134,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/Debug Linux}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/fmodex/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/rtAudio/lib/linux64}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/portaudio/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/glee/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/poco/lib/linux64}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/Debug Linux}&quot;"/>
@@ -2168,6 +2171,6 @@
 </cconfiguration>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<project id="moviePlayerExample.cdt.managedbuild.target.macosx.exe.1141044917" name="Executable" projectType="cdt.managedbuild.target.macosx.exe"/>
+<project id="audioOutputExample.cdt.managedbuild.target.macosx.exe.1141044917" name="Executable" projectType="cdt.managedbuild.target.macosx.exe"/>
 </storageModule>
 </cproject>
