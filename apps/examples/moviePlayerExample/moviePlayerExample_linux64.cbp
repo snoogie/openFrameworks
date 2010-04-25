@@ -32,7 +32,7 @@
 				<Option compiler="gcc"/>
 				<Option projectLinkerOptionsRelation="2"/>
 				<Compiler>
-					<Add option="-march=core2"/>
+					<Add option="-march=native"/>
 					<Add option="-O3"/>
 					<Add option="-MMD"/>
 				</Compiler>
@@ -129,6 +129,7 @@
 				<lib name="gstreamer-0.10"/>
 				<lib name="gstreamer-video-0.10"/>
 				<lib name="gstreamer-base-0.10"/>
+				<lib name="libudev" />
 			</lib_finder>
 			<code_completion/>
 			<envvars/>
