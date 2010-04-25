@@ -1551,6 +1551,7 @@
 <listOptionValue builtIn="false" value="PocoFoundation"/>
 <listOptionValue builtIn="false" value="GLee"/>
 <listOptionValue builtIn="false" value="glut"/>
+<listOptionValue builtIn="false" value="GLU"/>
 <listOptionValue builtIn="false" value="avcodec"/>
 <listOptionValue builtIn="false" value="avformat"/>
 <listOptionValue builtIn="false" value="avutil"/>
