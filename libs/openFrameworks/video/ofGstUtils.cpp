@@ -610,7 +610,7 @@ void ofGstUtils::listDevices(){
 	}
 }
 
-void ofGstUtils::setDeviceID(unsigned id){
+void ofGstUtils::setDeviceID(int id){
 	if(!camData.bInited) get_video_devices(camData);
 	if(camData.webcam_devices.size()>id){
 		deviceID = id;
@@ -941,6 +941,23 @@ void ofGstUtils::update(){
 void ofGstUtils::play(){
 	bPlaying = true;
 	setPaused(false);
+}
+
+
+bool ofGstUtils::isPaused(){
+	return bPaused;
+}
+
+bool ofGstUtils::isLoaded(){
+	return bLoaded;
+}
+
+bool ofGstUtils::isPlaying(){
+	return !bPaused && bLoaded;
+}
+
+void ofGstUtils::stop(){
+	setPaused(true);
 }
 
 void ofGstUtils::setPaused(bool _bPause){
