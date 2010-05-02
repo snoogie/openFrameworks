@@ -12,7 +12,7 @@ enum ofTexCompression
 	OF_COMPRESS_ARB
 };
 
-typedef struct{
+struct ofTextureData{
 
 	bool bAllocated;
 	int glType;
@@ -31,8 +31,11 @@ typedef struct{
 	//Sosolimited: texture compression
 	ofTexCompression compressionType;
 	bool useCompression;
+
+	//reference count
+	int references;
 		
-}ofTextureData;
+};
 
 //enable / disable the slight offset we add to ofTexture's texture coords to compensate for bad edge artifiacts
 //enabled by default
@@ -96,10 +99,10 @@ class ofTexture : public ofBaseDraws{
 	float getHeight();
 	float getWidth();
 
-	ofTextureData texData;
 protected:
 	void loadData(void * data, int w, int h, int glDataType);
 
+	ofTextureData * texData;
 	ofPoint anchor;
 	bool bAnchorIsPct;
 
