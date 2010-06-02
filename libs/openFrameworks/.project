@@ -3,6 +3,7 @@
 	<name>openFrameworks</name>
 	<comment></comment>
 	<projects>
+		<project>ofLibs</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -31,7 +32,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/openFrameworks/Release}</value>
+					<value>${workspace_loc:/androidGraphicsExample/Debug}</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.cleanBuildTarget</key>
