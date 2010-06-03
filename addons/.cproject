@@ -2635,6 +2635,7 @@
 <option id="gnu.cpp.compiler.option.include.paths.577508740" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="&quot;${NDK_ROOT}/build/platforms/${NDK_PLATFORM}/arch-arm/usr/include/&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/app}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/events}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/graphics}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/utils}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks}&quot;"/>
@@ -2642,6 +2643,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/include/freetype2}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/FreeImage/include}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/poco/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/ofxDirList/src}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/ofxNetwork/src}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/ofxThread/src}&quot;"/>
@@ -3148,7 +3150,7 @@
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.525448913" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.debug.1855826207" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.debug"/>
 <builder buildPath="${workspace_loc:/androidGraphicsExample/Debug}" id="cdt.managedbuild.target.gnu.builder.exe.debug.1855358843" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.debug"/>
-<tool id="cdt.managedbuild.tool.gnu.archiver.base.2006391095" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
+<tool command="ar" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.gnu.archiver.base.2006391095" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 <tool command="arm-eabi-g++" id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1923447610" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug">
 <option id="gnu.cpp.compiler.exe.debug.option.optimization.level.478663985" name="Optimization Level" superClass="gnu.cpp.compiler.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.exe.debug.option.debugging.level.1249016781" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
@@ -3156,6 +3158,7 @@
 <option id="gnu.cpp.compiler.option.include.paths.1843323715" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="&quot;${NDK_ROOT}/build/platforms/${NDK_PLATFORM}/arch-arm/usr/include/&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/app}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/events}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/graphics}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks/utils}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/openFrameworks}&quot;"/>
@@ -3163,6 +3166,7 @@
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/freetype/include/freetype2}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/FreeImage/include}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofLibs/poco/include}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/ofxDirList/src}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/ofxNetwork/src}&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofAddons/ofxThread/src}&quot;"/>
