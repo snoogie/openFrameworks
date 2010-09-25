@@ -97,7 +97,7 @@ static void * ofNotifyEvent(EventType & event, ArgumentsType & args){
 	try{
 		event.notify(NULL,args);
 		return NULL;
-	}catch(ofAttendedEventException & e){
+	}catch(ofAttendedEventException e){
 		return e.attendedBy;
 	}
 }

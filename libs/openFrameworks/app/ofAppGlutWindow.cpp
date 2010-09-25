@@ -445,13 +445,15 @@ void ofAppGlutWindow::display(void){
 
 	if( bEnableSetupScreen )ofSetupScreen();
 
+	try{
+		if(ofAppPtr){
+			ofAppPtr->draw();
+		}
 
-	if(ofAppPtr)
-		ofAppPtr->draw();
-
-	#ifdef OF_USING_POCO
-		ofNotifyEvent( ofEvents.draw, voidEventArgs );
-	#endif
+		#ifdef OF_USING_POCO
+			ofNotifyEvent( ofEvents.draw, voidEventArgs );
+		#endif
+	}catch(ofAttendedEventException){}
 
 
     #ifdef TARGET_WIN32
@@ -512,17 +514,20 @@ void ofAppGlutWindow::mouse_cb(int button, int state, int x, int y) {
 				ofNotifyEvent( ofEvents.mousePressed, mouseEventArgs );
 			#endif
 		} else if (state == GLUT_UP) {
-			if(ofAppPtr){
-				ofAppPtr->mouseReleased(x,y,button);
-				ofAppPtr->mouseReleased();
-			}
 
-			#ifdef OF_USING_POCO
-				mouseEventArgs.x = x;
-				mouseEventArgs.y = y;
-				mouseEventArgs.button = button;
-				ofNotifyEvent( ofEvents.mouseReleased, mouseEventArgs );
-			#endif
+			try{
+				if(ofAppPtr){
+					ofAppPtr->mouseReleased(x,y,button);
+					ofAppPtr->mouseReleased();
+				}
+				#ifdef OF_USING_POCO
+					mouseEventArgs.x = x;
+					mouseEventArgs.y = y;
+					mouseEventArgs.button = button;
+					ofNotifyEvent( ofEvents.mouseReleased, mouseEventArgs );
+				#endif
+			}catch(ofAttendedEventException){}
+
 		}
 		buttonInUse = button;
 	}
@@ -533,18 +538,21 @@ void ofAppGlutWindow::motion_cb(int x, int y) {
 	static ofMouseEventArgs mouseEventArgs;
 
 	if (nFrameCount > 0){
-		if(ofAppPtr){
-		ofAppPtr->mouseX = x;
-		ofAppPtr->mouseY = y;
-			ofAppPtr->mouseDragged(x,y,buttonInUse);
-		}
+		try{
+			if(ofAppPtr){
+				ofAppPtr->mouseX = x;
+				ofAppPtr->mouseY = y;
+				ofAppPtr->mouseDragged(x,y,buttonInUse);
+			}
 
-		#ifdef OF_USING_POCO
-			mouseEventArgs.x = x;
-			mouseEventArgs.y = y;
-			mouseEventArgs.button = buttonInUse;
-			ofNotifyEvent( ofEvents.mouseDragged, mouseEventArgs );
-		#endif
+			#ifdef OF_USING_POCO
+				mouseEventArgs.x = x;
+				mouseEventArgs.y = y;
+				mouseEventArgs.button = buttonInUse;
+				ofNotifyEvent( ofEvents.mouseDragged, mouseEventArgs );
+			#endif
+		}catch(ofAttendedEventException){}
+
 	}
 
 }
@@ -554,17 +562,19 @@ void ofAppGlutWindow::passive_motion_cb(int x, int y) {
 	static ofMouseEventArgs mouseEventArgs;
 
 	if (nFrameCount > 0){
-		if(ofAppPtr){
-		ofAppPtr->mouseX = x;
-		ofAppPtr->mouseY = y;
-			ofAppPtr->mouseMoved(x,y);
-		}
+		try{
+			if(ofAppPtr){
+				ofAppPtr->mouseX = x;
+				ofAppPtr->mouseY = y;
+				ofAppPtr->mouseMoved(x,y);
+			}
 
-		#ifdef OF_USING_POCO
-			mouseEventArgs.x = x;
-			mouseEventArgs.y = y;
-			ofNotifyEvent( ofEvents.mouseMoved, mouseEventArgs );
-		#endif
+			#ifdef OF_USING_POCO
+				mouseEventArgs.x = x;
+				mouseEventArgs.y = y;
+				ofNotifyEvent( ofEvents.mouseMoved, mouseEventArgs );
+			#endif
+		}catch(ofAttendedEventException){}
 	}
 }
 
@@ -611,12 +621,15 @@ void ofAppGlutWindow::idle_cb(void) {
 	 timeThen		= timeNow;
   	// --------------	
 
-	if(ofAppPtr)
-		ofAppPtr->update();
-
+	try{
+		if(ofAppPtr){
+			ofAppPtr->update();
+		}
 		#ifdef OF_USING_POCO
 		ofNotifyEvent( ofEvents.update, voidEventArgs);
 		#endif
+	}catch(ofAttendedEventException){}
+
 
 	glutPostRedisplay();
 }
@@ -626,17 +639,16 @@ void ofAppGlutWindow::idle_cb(void) {
 void ofAppGlutWindow::keyboard_cb(unsigned char key, int x, int y) {
 	static ofKeyEventArgs keyEventArgs;
 
-	if(ofAppPtr){
-		try{
+	try{
+		if(ofAppPtr){
 			ofAppPtr->keyPressed(key);
-		}catch(ofAttendedEventException){}
-	}
+		}
+		#ifdef OF_USING_POCO
+			keyEventArgs.key = key;
+			ofNotifyEvent( ofEvents.keyPressed, keyEventArgs );
+		#endif
+	}catch(ofAttendedEventException){}
 
-
-	#ifdef OF_USING_POCO
-		keyEventArgs.key = key;
-		ofNotifyEvent( ofEvents.keyPressed, keyEventArgs );
-	#endif
 
 	if (key == OF_KEY_ESC){				// "escape"
 		exitApp();
@@ -647,48 +659,50 @@ void ofAppGlutWindow::keyboard_cb(unsigned char key, int x, int y) {
 void ofAppGlutWindow::keyboard_up_cb(unsigned char key, int x, int y) {
 	static ofKeyEventArgs keyEventArgs;
 
-	if(ofAppPtr){
-		try{
+	try{
+		if(ofAppPtr){
 			ofAppPtr->keyReleased(key);
-		}catch(ofAttendedEventException){}
-	}
+		}
+		#ifdef OF_USING_POCO
+			keyEventArgs.key = key;
+			ofNotifyEvent( ofEvents.keyReleased, keyEventArgs );
+		#endif
+	}catch(ofAttendedEventException){}
 
-	#ifdef OF_USING_POCO
-		keyEventArgs.key = key;
-		ofNotifyEvent( ofEvents.keyReleased, keyEventArgs );
-	#endif
+
 }
 
 //------------------------------------------------------
 void ofAppGlutWindow::special_key_cb(int key, int x, int y) {
 	static ofKeyEventArgs keyEventArgs;
 
-	if(ofAppPtr){
-		try{
+	try{
+		if(ofAppPtr){
 			ofAppPtr->keyPressed(key | OF_KEY_MODIFIER);
-		}catch(ofAttendedEventException){}
-	}
+		}
+		#ifdef OF_USING_POCO
+			keyEventArgs.key = (key | OF_KEY_MODIFIER);
+			ofNotifyEvent( ofEvents.keyPressed, keyEventArgs );
+		#endif
+	}catch(ofAttendedEventException){}
 
-	#ifdef OF_USING_POCO
-		keyEventArgs.key = (key | OF_KEY_MODIFIER);
-		ofNotifyEvent( ofEvents.keyPressed, keyEventArgs );
-	#endif
+
 }
 
 //------------------------------------------------------------
 void ofAppGlutWindow::special_key_up_cb(int key, int x, int y) {
 	static ofKeyEventArgs keyEventArgs;
 
-	if(ofAppPtr){
-		try{
+	try{
+		if(ofAppPtr){
 			ofAppPtr->keyReleased(key | OF_KEY_MODIFIER);
-		}catch(ofAttendedEventException){}
-	}
+		}
+		#ifdef OF_USING_POCO
+			keyEventArgs.key = (key | OF_KEY_MODIFIER);
+			ofNotifyEvent( ofEvents.keyReleased, keyEventArgs );
+		#endif
+	}catch(ofAttendedEventException){}
 
-	#ifdef OF_USING_POCO
-		keyEventArgs.key = (key | OF_KEY_MODIFIER);
-		ofNotifyEvent( ofEvents.keyReleased, keyEventArgs );
-	#endif
 }
 
 //------------------------------------------------------------
@@ -698,17 +712,17 @@ void ofAppGlutWindow::resize_cb(int w, int h) {
 	windowW = w;
 	windowH = h;
 
-	if(ofAppPtr){
-		try{
+	try{
+		if(ofAppPtr){
 			ofAppPtr->windowResized(w,h);
-		}catch(ofAttendedEventException){}
-	}
+		}
+		#ifdef OF_USING_POCO
+			resizeEventArgs.width = w;
+			resizeEventArgs.height = h;
+			ofNotifyEvent( ofEvents.windowResized, resizeEventArgs );
+		#endif
+	}catch(ofAttendedEventException){}
 
-	#ifdef OF_USING_POCO
-		resizeEventArgs.width = w;
-		resizeEventArgs.height = h;
-		ofNotifyEvent( ofEvents.windowResized, resizeEventArgs );
-	#endif
 
 	nFramesSinceWindowResized = 0;
 }
