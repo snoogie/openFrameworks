@@ -19,6 +19,20 @@
 template <typename ArgumentsType>
 class ofEvent: public Poco::FIFOEvent<ArgumentsType> {};
 
+#define OF_ATTENDED_EVENT_EXCEPTION 100
+
+class ofAttendedEventException: public Poco::Exception{
+public:
+	ofAttendedEventException(): Poco::Exception(OF_ATTENDED_EVENT_EXCEPTION){
+		attendedBy = NULL;
+	};
+	ofAttendedEventException(void * _attendedBy): Poco::Exception(OF_ATTENDED_EVENT_EXCEPTION){
+		attendedBy = _attendedBy;
+	}
+
+	void * attendedBy;
+};
+
 
 
 //----------------------------------------------------
@@ -69,13 +83,23 @@ static void ofRemoveListener(EventType & event, ListenerClass  * listener, void 
 //	ofNotifyEvent(addon.newIntEvent, intArgument)
 
 template <class EventType,typename ArgumentsType, typename SenderType>
-static void ofNotifyEvent(EventType & event, ArgumentsType & args, SenderType * sender){
-	event.notify(sender,args);
+static void * ofNotifyEvent(EventType & event, ArgumentsType & args, SenderType * sender){
+	try{
+		event.notify(sender,args);
+		return NULL;
+	}catch(ofAttendedEventException & e){
+		return e.attendedBy;
+	}
 }
 
 template <class EventType,typename ArgumentsType>
-static void ofNotifyEvent(EventType & event, ArgumentsType & args){
-	event.notify(NULL,args);
+static void * ofNotifyEvent(EventType & event, ArgumentsType & args){
+	try{
+		event.notify(NULL,args);
+		return NULL;
+	}catch(ofAttendedEventException & e){
+		return e.attendedBy;
+	}
 }
 
 

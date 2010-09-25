@@ -626,8 +626,12 @@ void ofAppGlutWindow::idle_cb(void) {
 void ofAppGlutWindow::keyboard_cb(unsigned char key, int x, int y) {
 	static ofKeyEventArgs keyEventArgs;
 
-	if(ofAppPtr)
-		ofAppPtr->keyPressed(key);
+	if(ofAppPtr){
+		try{
+			ofAppPtr->keyPressed(key);
+		}catch(ofAttendedEventException){}
+	}
+
 
 	#ifdef OF_USING_POCO
 		keyEventArgs.key = key;
@@ -643,8 +647,11 @@ void ofAppGlutWindow::keyboard_cb(unsigned char key, int x, int y) {
 void ofAppGlutWindow::keyboard_up_cb(unsigned char key, int x, int y) {
 	static ofKeyEventArgs keyEventArgs;
 
-	if(ofAppPtr)
-		ofAppPtr->keyReleased(key);
+	if(ofAppPtr){
+		try{
+			ofAppPtr->keyReleased(key);
+		}catch(ofAttendedEventException){}
+	}
 
 	#ifdef OF_USING_POCO
 		keyEventArgs.key = key;
@@ -656,8 +663,11 @@ void ofAppGlutWindow::keyboard_up_cb(unsigned char key, int x, int y) {
 void ofAppGlutWindow::special_key_cb(int key, int x, int y) {
 	static ofKeyEventArgs keyEventArgs;
 
-	if(ofAppPtr)
-		ofAppPtr->keyPressed(key | OF_KEY_MODIFIER);
+	if(ofAppPtr){
+		try{
+			ofAppPtr->keyPressed(key | OF_KEY_MODIFIER);
+		}catch(ofAttendedEventException){}
+	}
 
 	#ifdef OF_USING_POCO
 		keyEventArgs.key = (key | OF_KEY_MODIFIER);
@@ -669,8 +679,11 @@ void ofAppGlutWindow::special_key_cb(int key, int x, int y) {
 void ofAppGlutWindow::special_key_up_cb(int key, int x, int y) {
 	static ofKeyEventArgs keyEventArgs;
 
-	if(ofAppPtr)
-		ofAppPtr->keyReleased(key | OF_KEY_MODIFIER);
+	if(ofAppPtr){
+		try{
+			ofAppPtr->keyReleased(key | OF_KEY_MODIFIER);
+		}catch(ofAttendedEventException){}
+	}
 
 	#ifdef OF_USING_POCO
 		keyEventArgs.key = (key | OF_KEY_MODIFIER);
@@ -685,8 +698,11 @@ void ofAppGlutWindow::resize_cb(int w, int h) {
 	windowW = w;
 	windowH = h;
 
-	if(ofAppPtr)
-		ofAppPtr->windowResized(w,h);
+	if(ofAppPtr){
+		try{
+			ofAppPtr->windowResized(w,h);
+		}catch(ofAttendedEventException){}
+	}
 
 	#ifdef OF_USING_POCO
 		resizeEventArgs.width = w;

@@ -120,8 +120,6 @@
 		}
 	};
 
-
-
 	extern ofCoreEvents ofEvents;
 
 	template<class ListenerClass>
@@ -168,6 +166,9 @@
 		ofRemoveListener(ofEvents.touchUp, listener, &ListenerClass::touchUp);
 	}
 
+	inline void ofAttendedEvent(void * attendedBy=NULL){
+		throw ofAttendedEventException(attendedBy);
+	}
 	#endif
 
 #endif
